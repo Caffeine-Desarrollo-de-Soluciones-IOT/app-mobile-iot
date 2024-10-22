@@ -1,20 +1,21 @@
+import 'package:app_mobile_iot/dependencies/injection.dart';
+import 'package:app_mobile_iot/features/login/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  setup();
+  runApp(FalconShieldApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class FalconShieldApp extends StatelessWidget {
+  //const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      title: 'FalconShield',
+      //theme: AppTheme.lightTheme,
+      home: LoginPage(),
     );
   }
 }
