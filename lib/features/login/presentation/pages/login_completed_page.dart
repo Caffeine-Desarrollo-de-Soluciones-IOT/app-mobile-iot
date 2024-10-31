@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginCompletedPage extends StatelessWidget {
+  const LoginCompletedPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,8 +14,8 @@ class LoginCompletedPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
+            child: const Padding(
+              padding: EdgeInsets.all(24.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,

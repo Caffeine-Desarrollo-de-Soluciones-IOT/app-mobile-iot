@@ -4,6 +4,13 @@ import '../../domain/entities/user.dart';
 
 class LoginEvent {}
 
+class LoginButtonPressed extends LoginEvent {
+  final String username;
+  final String password;
+
+  LoginButtonPressed(this.username, this.password);
+}
+
 class LoginState {
   final bool isLoading;
   final bool isSuccess;
@@ -29,11 +36,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase loginUseCase;
 
   LoginBloc(this.loginUseCase) : super(LoginState()) {
-    on<LoginEvent>((event, emit) async {
+    on<LoginButtonPressed>((event, emit) async {
       emit(state.copyWith(isLoading: true));
 
       try {
-        User? user = await loginUseCase.execute("admin", "12345");
+        //User? user = await loginUseCase.execute("admin", "12345");
+        User? user = await loginUseCase.execute(event.username, event.password);
         if (user != null) {
           emit(state.copyWith(isLoading: false, isSuccess: true));
         } else {

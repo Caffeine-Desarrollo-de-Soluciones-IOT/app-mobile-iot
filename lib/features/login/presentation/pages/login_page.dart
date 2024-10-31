@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../dependencies/injection.dart';
 import '../bloc/login_bloc.dart';
-import 'login_completed_page.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -20,10 +19,9 @@ class LoginPage extends StatelessWidget {
             child: BlocConsumer<LoginBloc, LoginState>(
               listener: (context, state) {
                 if (state.isSuccess) {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginCompletedPage()),
+                    MaterialPageRoute(builder: (context) => BottomAppBar()),
                   );
                 }
                 if (state.errorMessage.isNotEmpty) {
@@ -59,7 +57,11 @@ class LoginPage extends StatelessWidget {
                         else
                           ElevatedButton(
                             onPressed: () {
-                              context.read<LoginBloc>().add(LoginEvent());
+                              final username = _usernameController.text;
+                              final password = _passwordController.text;
+                              context
+                                  .read<LoginBloc>()
+                                  .add(LoginButtonPressed(username, password));
                             },
                             child: Text("Login"),
                             style: ElevatedButton.styleFrom(
