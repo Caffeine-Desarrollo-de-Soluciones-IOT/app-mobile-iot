@@ -40,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                         hintText: "Email",
-                        hintStyle: TextStyle(fontSize: 12),
+                        hintStyle: const TextStyle(fontSize: 12),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
