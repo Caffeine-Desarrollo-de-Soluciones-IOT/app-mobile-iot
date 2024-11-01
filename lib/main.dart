@@ -1,21 +1,28 @@
+import 'package:app_mobile_iot/core/widgets/bottom_nav_bar.dart';
 import 'package:app_mobile_iot/features/home/presentation/pages/home_page.dart';
+import 'package:app_mobile_iot/features/login/app.dart';
+import 'package:app_mobile_iot/features/login/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const FalconShieldApp());
+  runApp(const MyApp());
 }
 
-class FalconShieldApp extends StatelessWidget {
-  const FalconShieldApp({super.key});
+// void main() {
+//   runApp(const FalconShieldApp());
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
+// class FalconShieldApp extends StatelessWidget {
+//   const FalconShieldApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: LoginScreen(),
+//     );
+//   }
+// }
 
 // void main() {
 //   setup();
