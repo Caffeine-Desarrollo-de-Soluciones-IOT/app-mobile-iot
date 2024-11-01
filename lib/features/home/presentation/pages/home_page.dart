@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Text(
           "Selected tab: $_selectedIndex",
-          style: TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24),
         ),
       ),
       bottomNavigationBar: BottomNavBar(onTabChange: _onTabChanged),
