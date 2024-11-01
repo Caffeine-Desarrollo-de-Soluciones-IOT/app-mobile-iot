@@ -1,6 +1,7 @@
 import 'package:app_mobile_iot/core/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
+//homepage
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
