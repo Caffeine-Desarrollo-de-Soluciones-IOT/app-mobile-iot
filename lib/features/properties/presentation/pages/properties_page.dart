@@ -16,7 +16,12 @@ class _PropertiesPageState extends State<PropertiesPage> {
 
   // Controladores de los campos de texto para el formulario de nueva propiedad
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController areasController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController districtController = TextEditingController();
+  final TextEditingController zipCodeController = TextEditingController();
+  final TextEditingController referenceController = TextEditingController();
+  //final TextEditingController areasController = TextEditingController();
 
   void _showAddPropertyModal(BuildContext context) {
     showModalBottomSheet(
@@ -53,29 +58,54 @@ class _PropertiesPageState extends State<PropertiesPage> {
                 style: TextStyle(color: Colors.white),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: areasController,
-                decoration: InputDecoration(
-                  labelText: "Number of Areas",
-                  labelStyle: TextStyle(color: Colors.grey),
-                  filled: true,
-                  fillColor: Colors.grey.shade800,
-                ),
-                keyboardType: TextInputType.number,
-                style: TextStyle(color: Colors.white),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Back"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      foregroundColor: Colors.white,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _continueToNextStep(context);
+                    },
+                    child: const Text('Continue'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.greenAccent,
+                      foregroundColor: Colors.black,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  _addProperty();
-                  Navigator.of(context).pop();
-                },
-                child: Text("Add Property"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.greenAccent,
-                  foregroundColor: Colors.black,
-                ),
-              ),
+              // TextField(
+              //   controller: areasController,
+              //   decoration: InputDecoration(
+              //     labelText: "Number of Areas",
+              //     labelStyle: TextStyle(color: Colors.grey),
+              //     filled: true,
+              //     fillColor: Colors.grey.shade800,
+              //   ),
+              //   keyboardType: TextInputType.number,
+              //   style: TextStyle(color: Colors.white),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     _addProperty();
+              //     Navigator.of(context).pop();
+              //   },
+              //   child: Text("Add Property"),
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Colors.greenAccent,
+              //     foregroundColor: Colors.black,
+              //   ),
+              // ),
               SizedBox(height: 20),
             ],
           ),
@@ -84,18 +114,23 @@ class _PropertiesPageState extends State<PropertiesPage> {
     );
   }
 
-  void _addProperty() {
-    setState(() {
-      properties.add({
-        'name': nameController.text,
-        'areas': areasController.text,
-      });
-    });
-
-    // limpiar campos
-    nameController.clear();
-    areasController.clear();
+  void _continueToNextStep(BuildContext context) {
+    print("Property Name: ${nameController.text}");
+    Navigator.of(context).pop();
   }
+
+  // void _addProperty() {
+  //   setState(() {
+  //     properties.add({
+  //       'name': nameController.text,
+  //       //'areas': areasController.text,
+  //     });
+  //   });
+
+  //   // limpiar campos
+  //   nameController.clear();
+  //   //areasController.clear();
+  // }
 
   @override
   Widget build(BuildContext context) {
