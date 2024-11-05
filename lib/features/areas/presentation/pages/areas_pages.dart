@@ -10,9 +10,16 @@ class AreasPage extends StatefulWidget {
 }
 
 class _AreasPageState extends State<AreasPage> {
-  final List<Map<String, String>> areas = [];
+  final List<Map<String, dynamic>> areas = [];
 
   final TextEditingController areaNameController = TextEditingController();
+
+  final List<String> images = [
+    'lib/assets/images/living_room.jpeg',
+    'lib/assets/images/bedroom.jpg',
+    'lib/assets/images/kitchen.jpg',
+    'lib/assets/images/office.jpg',
+  ];
 
   void _showAddAreaModal() {
     showModalBottomSheet(
@@ -71,8 +78,9 @@ class _AreasPageState extends State<AreasPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      _addArea();
+                      //_addArea();
                       Navigator.of(context).pop();
+                      _showSelectImageModal();
                     },
                     child: const Text("Continue"),
                     style: ElevatedButton.styleFrom(
@@ -90,11 +98,76 @@ class _AreasPageState extends State<AreasPage> {
     );
   }
 
-  void _addArea() {
+  void _showSelectImageModal() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.grey.shade900,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            top: 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "Select Area Image",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              const SizedBox(height: 20),
+              GridView.builder(
+                shrinkWrap: true,
+                itemCount: images.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      _addArea(images[index]);
+                      Navigator.of(context).pop();
+                    },
+                    child: Image.asset(
+                      images[index],
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Back"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                  foregroundColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _addArea(String imagePath) {
     setState(() {
       areas.add({
         "name": areaNameController.text,
         "devices": "0",
+        "image": imagePath,
       });
     });
     areaNameController.clear();
