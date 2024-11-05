@@ -1,4 +1,4 @@
-import 'package:app_mobile_iot/features/areas/presentation/pages/areas_pages.dart';
+import 'package:app_mobile_iot/features/areas/presentation/pages/areas_page.dart';
 import 'package:flutter/material.dart';
 
 class PropertiesPage extends StatefulWidget {

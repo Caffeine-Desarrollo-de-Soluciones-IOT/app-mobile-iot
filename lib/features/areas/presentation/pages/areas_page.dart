@@ -1,3 +1,4 @@
+import 'package:app_mobile_iot/features/devices/presentation/devices_page.dart';
 import 'package:flutter/material.dart';
 
 class AreasPage extends StatefulWidget {
@@ -246,7 +247,16 @@ class _AreasPageState extends State<AreasPage> {
                       Icons.arrow_forward_ios,
                       color: Colors.greenAccent,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DevicesPage(
+                            areaName: area["name"]!,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },

@@ -1,3 +1,4 @@
+import 'package:app_mobile_iot/features/areas/presentation/pages/areas_page.dart';
 import 'package:app_mobile_iot/features/home/presentation/pages/home_page.dart';
 import 'package:app_mobile_iot/features/login/cubits/cubit/login_cubit.dart';
 import 'package:app_mobile_iot/features/login/screens/login_screen.dart';
