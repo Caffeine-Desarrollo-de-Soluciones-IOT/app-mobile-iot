@@ -133,8 +133,8 @@ class _AreasPageState extends State<AreasPage> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      _addArea(images[index]);
                       Navigator.of(context).pop();
+                      _addArea(images[index]);
                     },
                     child: Image.asset(
                       images[index],
@@ -171,6 +171,38 @@ class _AreasPageState extends State<AreasPage> {
       });
     });
     areaNameController.clear();
+    _showConfirmationDialog();
+  }
+
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.grey.shade900,
+          title: const Text(
+            "Area Added",
+            style: TextStyle(color: Colors.white),
+          ),
+          content: Text(
+            "${areaNameController.text} has been added successfully!",
+            style: const TextStyle(color: Colors.white),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Done"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.greenAccent,
+                foregroundColor: Colors.black,
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -196,9 +228,11 @@ class _AreasPageState extends State<AreasPage> {
                   margin:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.greenAccent,
+                    leading: Image.asset(
+                      area["image"]!,
+                      fit: BoxFit.cover,
+                      width: 50,
+                      height: 50,
                     ),
                     title: Text(
                       area["name"]!,
