@@ -1,3 +1,4 @@
+import 'package:app_mobile_iot/features/areas/presentation/pages/areas_pages.dart';
 import 'package:flutter/material.dart';
 
 class PropertiesPage extends StatefulWidget {
@@ -115,8 +116,9 @@ class _PropertiesPageState extends State<PropertiesPage> {
   }
 
   void _continueToNextStep(BuildContext context) {
-    print("Property Name: ${nameController.text}");
+    //print("Property Name: ${nameController.text}");
     Navigator.of(context).pop();
+    _showAdditionalInfoModal(context);
   }
 
   // void _addProperty() {
@@ -131,6 +133,140 @@ class _PropertiesPageState extends State<PropertiesPage> {
   //   nameController.clear();
   //   //areasController.clear();
   // }
+
+  void _showAdditionalInfoModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.grey.shade900,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            top: 20,
+            left: 20,
+            right: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "Property Details",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: addressController,
+                decoration: InputDecoration(
+                  labelText: "Address",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: cityController,
+                decoration: InputDecoration(
+                  labelText: "City",
+                  labelStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: districtController,
+                decoration: InputDecoration(
+                  labelText: 'District',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: zipCodeController,
+                decoration: InputDecoration(
+                  labelText: 'ZIP Code',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                keyboardType: TextInputType.number,
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: referenceController,
+                decoration: InputDecoration(
+                  labelText: 'Reference',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  _addProperty();
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Done"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.greenAccent,
+                  foregroundColor: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _addProperty() {
+    setState(() {
+      properties.add({
+        "name": nameController.text,
+        "areas": "Custom Area",
+      });
+    });
+    nameController.clear();
+    addressController.clear();
+    cityController.clear();
+    districtController.clear();
+    zipCodeController.clear();
+    referenceController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +294,15 @@ class _PropertiesPageState extends State<PropertiesPage> {
               ),
               trailing:
                   Icon(Icons.arrow_forward_ios, color: Colors.greenAccent),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        AreasPage(propertyName: property['name']!),
+                  ),
+                );
+              },
             ),
           );
         },
