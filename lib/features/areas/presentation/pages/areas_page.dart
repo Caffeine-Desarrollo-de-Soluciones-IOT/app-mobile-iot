@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AreasPage extends StatefulWidget {
   final String propertyName;
 
-  const AreasPage({super.key, required this.propertyName});
+  const AreasPage({super.key, required this.propertyName, required propertyId});
 
   @override
   State<AreasPage> createState() => _AreasPageState();

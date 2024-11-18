@@ -32,16 +32,18 @@ class _PropertiesPageState extends State<PropertiesPage> {
           await _authService.authenticatedRequest('properties/registered');
       log('data: ${response.body}');
       if (response.statusCode == 200) {
-        // Decodificar como Map<String, dynamic>
-        final Map<String, dynamic> jsonData = json.decode(response.body);
+        final Map<String, dynamic> decodedResponse = json.decode(response.body);
 
-        // Extraer la lista de propiedades
-        final List<dynamic> data = jsonData['properties'];
-
-        setState(() {
-          properties = data.map((e) => e as Map<String, dynamic>).toList();
-          _isLoading = false;
-        });
+        if (decodedResponse['data'] != null &&
+            decodedResponse['data'] is List) {
+          setState(() {
+            properties = List<Map<String, dynamic>>.from(
+                decodedResponse['data'] as List);
+            _isLoading = false;
+          });
+        } else {
+          throw Exception('Formato de respuesta inesperado.');
+        }
       } else {
         throw Exception('Error al obtener propiedades: ${response.statusCode}');
       }
@@ -95,6 +97,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                           color: Colors.greenAccent,
                         ),
                         onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AreasPage(
+                                propertyId: property['id'],
+                                propertyName: '',
+                              ),
+                            ),
+                          );
                           // Navegar a detalles de la propiedad si es necesario
                         },
                       ),
