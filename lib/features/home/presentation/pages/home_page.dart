@@ -1,4 +1,6 @@
 import 'package:app_mobile_iot/core/widgets/bottom_nav_bar.dart';
+import 'package:app_mobile_iot/features/notifications/presentation/pages/notifications_page.dart';
+import 'package:app_mobile_iot/features/profile/presentation/pages/profile_page.dart';
 import 'package:app_mobile_iot/features/properties/presentation/pages/properties_page.dart';
 import 'package:flutter/material.dart';
 
@@ -14,17 +16,10 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    Center(
-        child: Text('Home Page',
-            style: TextStyle(color: Colors.white))), // Placeholder for Home
-    PropertiesPage(), // Properties page
-    Center(
-        child: Text('Notifications Page',
-            style: TextStyle(
-                color: Colors.white))), // Placeholder for Notifications
-    Center(
-        child: Text('Profile Page',
-            style: TextStyle(color: Colors.white))), // Placeholder for Profile
+    const Center(child: Text('Home Page')), // Placeholder for Home
+    PropertiesPage(), // Placeholder
+    const NotificationsPage(), // Notifications page
+    const ProfilePage(), // Placeholder for Profile// Placeholder for Profile
   ];
 
   void _onTabChanged(int index) {
@@ -41,16 +36,4 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavBar(onTabChange: _onTabChanged),
     );
   }
-
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: Center(
-  //       child: Text(
-  //         "Selected tab: $_selectedIndex",
-  //         style: const TextStyle(fontSize: 24),
-  //       ),
-  //     ),
-  //     bottomNavigationBar: BottomNavBar(onTabChange: _onTabChanged),
-  //   );
-  // }
 }

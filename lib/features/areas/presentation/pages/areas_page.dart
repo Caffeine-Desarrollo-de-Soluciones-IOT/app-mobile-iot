@@ -1,4 +1,4 @@
-import 'package:app_mobile_iot/features/devices/presentation/devices_page.dart';
+import 'package:app_mobile_iot/features/devices/presentation/pages/devices_page.dart';
 import 'package:flutter/material.dart';
 
 class AreasPage extends StatefulWidget {

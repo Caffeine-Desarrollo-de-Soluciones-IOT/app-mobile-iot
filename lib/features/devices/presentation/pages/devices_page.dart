@@ -1,4 +1,4 @@
-import 'package:app_mobile_iot/features/devices/presentation/device_detail_page.dart';
+import 'package:app_mobile_iot/features/devices/presentation/pages/device_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class DevicesPage extends StatefulWidget {
