@@ -84,15 +84,17 @@ class LoginScreen extends StatelessWidget {
               },
               builder: (context, state) {
                 return ElevatedButton(
-                    onPressed: () {
-                      context.read<LoginCubit>().login();
-                    },
-                    child: state.isLoading
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator())
-                        : const Text("Login"));
+                  onPressed: () {
+                    context.read<LoginCubit>().login();
+                  },
+                  child: state.isLoading
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(),
+                        )
+                      : const Text("Login"),
+                );
               },
             )
           ],

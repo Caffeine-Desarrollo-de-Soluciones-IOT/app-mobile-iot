@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: Colors.teal),
       home: BlocProvider(
         create: (context) => LoginCubit(),
-        child: const HomePage(),
+        child: const LoginScreen(),
       ),
     );
   }
